@@ -4,7 +4,7 @@ import MenuIcon from "../../assets/images/Menu.jpg"
 const menuToggle =(props)=>{
     return(
         <div className={classes.Menu}>
-        <a onClick={props.clicked}><img src={MenuIcon} alt="Menu"></img></a>
+        <a onClick={props.clicked}><img src={MenuIcon} alt="Menu" href=""></img></a>
         </div>
         
     );
