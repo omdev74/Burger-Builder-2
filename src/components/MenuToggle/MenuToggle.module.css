@@ -1,0 +1,24 @@
+.Menu{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: auto;
+}
+.Menu a{
+    background-color: #6300ec;
+    height:100%;
+    padding: 16px 10px;
+    box-sizing: border-box;
+    display: block;
+    border-radius: 2px;
+    width: auto;
+}
+.Menu a img{
+    height: inherit;
+
+}
+@media(min-width: 500px){
+    .Menu a{
+        display: none;
+    }
+}
