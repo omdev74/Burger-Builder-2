@@ -6,6 +6,7 @@ import Modal from "../../components/Ui/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import axios from "../../axios-orders";
 import Spinner from "../../components/Ui/Spinner/Spinner";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES={
             cheese:20,
@@ -95,7 +96,8 @@ class BurgerBuilder extends Component{
             },
             deliveryMethod:"Fastest"
         }
-
+        //will throw an error
+        // axios.post("/orders",order)
         axios.post("/orders.json",order)
         .then(response => {
             this.setState({loading:false,purchasing:false})
@@ -140,4 +142,4 @@ class BurgerBuilder extends Component{
         </Aux>);
     }
 }
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder,axios);
