@@ -1,20 +1,36 @@
 import React,{Component} from "react";
+
 import Modal from "../../components/Ui/Modal/Modal";
 import Aux from "../Auxiliary";
+
 const withErrorHandler = (WrappedComponent,axios)=>{
     return class extends Component {
         state={
             error:null
         }
-        componentDidMount(){
-            axios.interceptors.response.use(res=>res,error =>{
-                this.setState({error:error});
-                
-            })
-            axios.interceptors.request.use(req=>{
+        // constructor(props){
+        //     super(props);
+        // console.log("constructor acceseed")
+        
+        //obselete
+        componentWillMount(){
+            
+            this.reqInterceptor = axios.interceptors.request.use(req=>{
                 this.setState({error:null});
                 return req;
             })
+            this.resInterceptor = axios.interceptors.response.use(res=>res,error =>{
+                this.setState({error:error});
+                // console.log("error updated")
+            })
+            
+        }
+        componentWillUnmount(){
+            // console.log("componentWillUnmount",this.reqInterceptor,this.resInterceptor);
+            axios.interceptors.request.eject(this.reqInterceptor)
+            axios.interceptors.request.eject(this.resInterceptor)
+
+
         }
         errorConfirmedHandler=()=>{
             this.setState({error:null});
@@ -25,10 +41,11 @@ const withErrorHandler = (WrappedComponent,axios)=>{
                     <Modal 
                     show={this.state.error}
                     modalClosed={this.errorConfirmedHandler}>
-                        {this.state.error ? this.state.error.message:null}
+                        {this.state.error ? this.state.error.message : null}
+                        {console.log("error")}
                         {/* Something Did'nt Work! */}
                     </Modal>
-                <WrappedComponent {...this.props} />
+                    <WrappedComponent {...this.props} />
                 </Aux>
             )
 
