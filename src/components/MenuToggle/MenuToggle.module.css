@@ -18,7 +18,7 @@
 
 }
 @media(min-width: 500px){
-    .Menu a{
+    .MenuBtn{
         display: none;
     }
 }
