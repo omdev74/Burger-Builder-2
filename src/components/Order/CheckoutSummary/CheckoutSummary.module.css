@@ -1,0 +1,14 @@
+.CheckoutSummary{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+
+    text-align: center;
+    background-color: rgb(15, 11, 11);
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: -1rem 0 3rem #000;
+    
+    
+}

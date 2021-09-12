@@ -32,7 +32,7 @@ class BurgerBuilder extends Component{
         error:false
     }
     componentDidMount(){
-        axios.get("/ingredients")
+        axios.get("/ingredients.json")
         .then(response =>{
             this.setState({ingredients:response.data})
         })
@@ -110,7 +110,7 @@ class BurgerBuilder extends Component{
         }
         //will throw an error
         // axios.post("/orders",order)
-        axios.post("/orders",order)
+        axios.post("/orders.json",order)
         .then(response => {
             this.setState({loading:false,purchasing:false})
         })
@@ -134,14 +134,17 @@ class BurgerBuilder extends Component{
             burger = (
                 <Aux>
                 <Burger ingredients={this.state.ingredients}/>
-                <BuildControls
-                ingredientAdded={this.addIngredientHandler}
-                ingredientRemoved={this.removeIngredientHandler}
-                disabled={disabledinfo}
-                purchasable={this.state.purchasable}
-                price={this.state.totalPrice}
-                ordered={this.purchaseHandler}
-                />
+                <div>
+                    <BuildControls
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler}
+                    disabled={disabledinfo}
+                    purchasable={this.state.purchasable}
+                    price={this.state.totalPrice}
+                    ordered={this.purchaseHandler}
+                    />
+                </div>
+                
                 </Aux>
             )
             orderSummary = <OrderSummary 

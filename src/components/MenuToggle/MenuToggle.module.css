@@ -4,7 +4,7 @@
     height: 100%;
     width: auto;
 }
-.Menu a{
+.MenuBtn{
     background-color: #6300ec;
     height:100%;
     padding: 16px 10px;
@@ -13,7 +13,7 @@
     border-radius: 2px;
     width: auto;
 }
-.Menu a img{
+.MenuBtn img{
     height: inherit;
 
 }

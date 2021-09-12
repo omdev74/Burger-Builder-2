@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Layout from "./components/Layout/Layout";
+import Checkout from "./containers/Checkout/Checkout";
 class App extends Component{
   state={show:true}
     
@@ -15,6 +16,7 @@ class App extends Component{
         <Layout>
           <BurgerBuilder />
           {/* {this.state.show ? <BurgerBuilder/>:null} */}
+          <Checkout></Checkout>
         </Layout>
       </div>
     )
