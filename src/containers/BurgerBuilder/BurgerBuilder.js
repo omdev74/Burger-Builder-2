@@ -90,33 +90,35 @@ class BurgerBuilder extends Component{
         this.setState({purchasing:false})
     }
     purchaseContinueHandler=()=>{
-        this.setState({loading:true})
-        
-        // alert("You coninue!!!")
-       //Dummy Data
-        const order={
-            ingredients:this.state.ingredients,
-            price:this.state.totalPrice,//always recalculate it on server
-            customer:{
-                name:"Om dev",
-                address:{
-                    street:"gali no 11",
-                    zipCode:"110045",
-                    country:"India"
-                },
-                email:"test@test.com"
-            },
-            deliveryMethod:"Fastest"
-        }
-        //will throw an error
-        // axios.post("/orders",order)
-        axios.post("/orders.json",order)
-        .then(response => {
-            this.setState({loading:false,purchasing:false})
-        })
-        .catch(error => {
-            this.setState({loading:false,purchasing:false})
-        })
+        console.log(this.props)
+    //     this.setState({loading:true})
+    //     alert("You coninue!!!")
+    //    //Dummy Data
+    //     const order={
+    //         ingredients:this.state.ingredients,
+    //         price:this.state.totalPrice,//always recalculate it on server
+    //         customer:{
+    //             name:"Om dev",
+    //             address:{
+    //                 street:"gali no 11",
+    //                 zipCode:"110045",
+    //                 country:"India"
+    //             },
+    //             email:"test@test.com"
+    //         },
+    //         deliveryMethod:"Fastest"
+    //     }
+    //     //will throw an error
+    //     // axios.post("/orders",order)
+    //     axios.post("/orders.json",order)
+    //     .then(response => {
+    //         this.setState({loading:false,purchasing:false})
+    //     })
+    //     .catch(error => {
+    //         this.setState({loading:false,purchasing:false})
+    //     })
+    this.props.history.push("/checkout")
+    
 
         
     }

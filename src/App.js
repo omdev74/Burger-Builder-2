@@ -2,6 +2,7 @@ import React,{Component} from "react";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Layout from "./components/Layout/Layout";
 import Checkout from "./containers/Checkout/Checkout";
+import {Route,Switch} from "react-router-dom"
 class App extends Component{
   state={show:true}
     
@@ -14,9 +15,11 @@ class App extends Component{
     return(
       <div>
         <Layout>
-          <BurgerBuilder />
-          {/* {this.state.show ? <BurgerBuilder/>:null} */}
-          <Checkout></Checkout>
+          <Switch>
+          <Route path="/checkout" exact component={Checkout} />
+          <Route path="/" exact component={BurgerBuilder} />
+          </Switch>
+        
         </Layout>
       </div>
     )
