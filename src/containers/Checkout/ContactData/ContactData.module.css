@@ -1,0 +1,54 @@
+.ContactData {
+    width: 70%;
+    margin: 20px auto;
+    text-align: center;
+
+    background-color: rgb(15, 11, 11);
+    border-radius: 10px;
+    padding: 30px 30px 50px;
+    color: white;
+    font-weight: 500;
+    box-shadow: -1rem 0 3rem #000;
+
+}
+
+.ContactData label {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ContactData input,
+.ContactData textarea,
+.ContactData select {
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    outline: none;
+    font: inherit;
+    margin: auto;
+    padding: 12px 20px;
+    border-radius: 4px;
+
+    background-color:#262626;
+    color: white;
+
+}
+
+.ContactData button {
+    margin: 5px 0;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid black;
+    background-color: #3700b5;
+    color: white;
+    cursor: pointer;
+}
+
+.ContactData button:hover,
+.ContactData button:active {
+    color: white;
+    background-color: #490dd6;
+}
