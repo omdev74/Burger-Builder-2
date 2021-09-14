@@ -6,12 +6,13 @@ import Aux from "../Auxiliary";
 const withErrorHandler = (WrappedComponent,axios)=>{
     return class extends Component {
         
-        constructor(props){
-            super(props);
+        // constructor(props){
+        //     super(props);
+        componentWillMount(){
         console.log("constructor acceseed")
-        this.state={
+        this.setState({
             error:null
-        }
+        })
         this.reqInterceptor = axios.interceptors.request.use(req=>{
                     this.setState({error:null});
                     return req;

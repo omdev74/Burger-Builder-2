@@ -21,11 +21,16 @@
     width: 70%;
     padding: 20px;
 
-    text-align: center;
+    /* text-align: center; */
     background-color: #fff;
-    height: fit-content;
+    height: 400px;
+    scroll-behavior: smooth;
+    overflow: scroll;
     border-radius: 1px 1px 10px 10px;
     /* box-shadow: -1rem 0 3rem #000; */
     
     
+}
+.List::-webkit-scrollbar {
+    display: none;
 }

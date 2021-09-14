@@ -4,7 +4,16 @@
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
+    height: 100px;
     /* border: solid 1px; */
     
+
+}
+.Span{
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0 8px;
+    padding: 5px;
 
 }
