@@ -1,0 +1,47 @@
+.Input{
+    width: 100%;
+}
+.Label {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.InputElement {
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    outline: none;
+    font: inherit;
+    margin: auto;
+    padding: 12px 20px;
+    border-radius: 4px;
+
+    background-color:#ebebeb;
+    color: black;
+
+}
+
+.Button {
+    margin: 5px 0;
+    padding: 10px;
+    font: inherit;
+    border: 1px solid black;
+    background-color: #3700b5;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.Button:hover,
+.Button:active {
+    color: white;
+    background-color: #490dd6;
+    transform: scaleZ(5.1%);
+    }
+
+.InputElement:focus{
+    border: 2px solid #6300EC;;
+}

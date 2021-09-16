@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import classes from "./ContactData.module.css"
-
+import Input from "../../../components/Ui/Input/Input";
 import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
 class ContactData extends Component{
@@ -13,6 +13,13 @@ class ContactData extends Component{
                     country:""
                 },
             loading:false
+    }
+    // constructor(props){
+    //     super(props);
+    //     // this.nameRef = React.createRef();
+    // }
+    componentDidMount(){
+        // this.nameRef.current.focus()
     }
     orderHandler=(event)=>{
         event.preventDefault();
@@ -48,10 +55,11 @@ class ContactData extends Component{
 
     }
     render(){
+        
         let form=(
             <form>
-                <label>Name</label>
-                <input type="text"  />
+                {/* <label>Name</label>
+                <input type="text" ref={this.nameRef}/>
                 <label>Email</label>
                 <input type="text"  />
                 <label>Address</label>
@@ -61,18 +69,26 @@ class ContactData extends Component{
                     <option value="India">India</option>
                     <option value="Pakistan">Pakistan</option>
                 </select>
-                <button onClick={this.orderHandler}>Order</button>
+                <button onClick={this.orderHandler}>Order</button> */}
+                <Input inputtype="input" label="Name" type="text" name="name" placeholder="Your Name"></Input>
+                <Input inputtype="input" label="Email" type="text" name="Email" placeholder="Email"></Input>
+                <Input inputtype="textarea" label="Address" type="textarea" name="Address" rows="4" placeholder="Your Address"></Input>
+                <Input inputtype="select" label="Country" type="select" name="Country" placeholder="Select a Country"></Input>
+                <Input inputtype="button" onClick={this.orderHandler}>Order</Input> 
                 </form>
         );
         if(this.state.loading){
             form=<Spinner />
         }
-        return(
-            <div className={classes.ContactData}>
-                <h1>Enter your details..</h1>
-                {form}
-                
-            </div>
+        return(<div>
+
+                <div className="Headers"> <h1>Enter your details..</h1></div>
+                <div className={classes.ContactData}>
+                    {form}
+                    {console.log(this.nameRef)}
+                    
+                </div>
+                </div>
         )
 
     }
