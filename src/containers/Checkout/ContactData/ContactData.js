@@ -5,14 +5,59 @@ import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
 class ContactData extends Component{
     state={
-        name:"",
-        email:"",
-        address:{
-                    street:"",
-                    postalCode:"",
-                    country:""
+        orderForn:{
+                name:{
+                    elementType:"input",
+                    elementConfig:{
+                        type:"text",
+                        placeholder:"Your Name"
+                    },
+                    value:""
                 },
-            loading:false
+                street:{
+                    elementType:"textarea",
+                    elementConfig:{
+                        type:"text",
+                        placeholder:"Your Street",
+                        rows:"4"
+                    },
+                    value:""
+                },
+                zipCode:{
+                    elementType:"input",
+                    elementConfig:{
+                        type:"text",
+                        placeholder:"Your Postal/Zip code"
+                    },
+                    value:""
+                },
+                country:{
+                    elementType:"input",
+                    elementConfig:{
+                        type:"text",
+                        placeholder:"Country"
+                    },
+                    value:""
+                },
+                email:{
+                    elementType:"input",
+                    elementConfig:{
+                        type:"email",
+                        placeholder:"Your E-Mail"
+                    },
+                    value:""
+                },
+                deliveryMethod:{
+                    elementType:"select",
+                    elementConfig:{
+                        options:[
+                            {value:"fastest",displayValue:"Fastest"},
+                            {value:"cheapest",displayValue:"Cheapest"}
+                        ]
+                    },
+                }
+            },
+        loading:false
     }
     // constructor(props){
     //     super(props);
@@ -29,16 +74,7 @@ class ContactData extends Component{
         const order={
             ingredients:this.props.ingredients,
             price:this.props.price,//always recalculate it on server
-            customer:{
-                name:"Om dev",
-                address:{
-                    street:"gali no 11",
-                    zipCode:"110045",
-                    country:"India"
-                },
-                email:"test@test.com"
-            },
-            deliveryMethod:"Fastest"
+            
         }
         //will throw an error
         // axios.post("/orders",order)
@@ -55,26 +91,26 @@ class ContactData extends Component{
 
     }
     render(){
+        let formElementsArray=[]
+    for(let key in this.state.orderForn){
+        formElementsArray.push({
+            id:key,
+            config:this.state.orderForn[key]
+        })
+    }
         
         let form=(
             <form>
-                {/* <label>Name</label>
-                <input type="text" ref={this.nameRef}/>
-                <label>Email</label>
-                <input type="text"  />
-                <label>Address</label>
-                <textarea rows="4"  />
-                <label>Country</label>
-                <select>
-                    <option value="India">India</option>
-                    <option value="Pakistan">Pakistan</option>
-                </select>
-                <button onClick={this.orderHandler}>Order</button> */}
-                <Input inputtype="input" label="Name" type="text" name="name" placeholder="Your Name"></Input>
-                <Input inputtype="input" label="Email" type="text" name="Email" placeholder="Email"></Input>
-                <Input inputtype="textarea" label="Address" type="textarea" name="Address" rows="4" placeholder="Your Address"></Input>
-                <Input inputtype="select" label="Country" type="select" name="Country" placeholder="Select a Country"></Input>
-                <Input inputtype="button" onClick={this.orderHandler}>Order</Input> 
+                {formElementsArray.map(formElement=>(
+                <Input
+                label={formElement.id.toUpperCase()}
+                elementType={formElement.config.elementType}
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value}
+                ></Input>)
+                )}
+
+                <Input elementType="button" onClick={this.orderHandler}>Order</Input> 
                 </form>
         );
         if(this.state.loading){
