@@ -5,7 +5,7 @@ import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
 class ContactData extends Component{
     state={
-        orderForn:{
+        orderForm:{
                 name:{
                     elementType:"input",
                     elementConfig:{
@@ -70,10 +70,16 @@ class ContactData extends Component{
         event.preventDefault();
         this.setState({loading:true})
         // alert("You coninue!!!")
-       //Dummy Data
+
+        const formData={};
+        for(let formElementIdentifier in this.state.orderForm){
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
+        }
+        console.log(formData)
         const order={
             ingredients:this.props.ingredients,
             price:this.props.price,//always recalculate it on server
+            orderData:formData
             
         }
         //will throw an error
@@ -90,27 +96,42 @@ class ContactData extends Component{
         })
 
     }
+    onChangeHandler=(event,inputIdentifier)=>{
+        console.log(event.target.value);
+        const updatedOrderForm={...this.state.orderForm}
+        console.log(updatedOrderForm)
+        //Deep Clone
+        const updatedFormElement={...updatedOrderForm[inputIdentifier]};
+        console.log(updatedFormElement)
+
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        this.setState({orderForm:updatedOrderForm}) 
+
+
+    }
     render(){
         let formElementsArray=[]
-    for(let key in this.state.orderForn){
+    for(let key in this.state.orderForm){
         formElementsArray.push({
             id:key,
-            config:this.state.orderForn[key]
+            config:this.state.orderForm[key]
         })
     }
         
         let form=(
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement=>(
                 <Input
                 label={formElement.id.toUpperCase()}
                 elementType={formElement.config.elementType}
                 elementConfig={formElement.config.elementConfig}
                 value={formElement.config.value}
+                changed={(event)=>this.onChangeHandler(event,formElement.id)}
                 ></Input>)
                 )}
 
-                <Input elementType="button" onClick={this.orderHandler}>Order</Input> 
+                <Input elementType="button">Order</Input> 
                 </form>
         );
         if(this.state.loading){
