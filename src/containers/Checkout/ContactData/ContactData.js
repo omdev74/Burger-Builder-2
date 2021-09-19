@@ -3,6 +3,7 @@ import classes from "./ContactData.module.css"
 import Input from "../../../components/Ui/Input/Input";
 import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
+import validator from "validator";
 class ContactData extends Component{
     state={
         orderForm:{
@@ -12,7 +13,11 @@ class ContactData extends Component{
                         type:"text",
                         placeholder:"Your Name"
                     },
-                    value:""
+                    value:"",
+                    validation:{
+                        required:true
+                    },
+                    valid:false
                 },
                 street:{
                     elementType:"textarea",
@@ -21,7 +26,11 @@ class ContactData extends Component{
                         placeholder:"Your Street",
                         rows:"4"
                     },
-                    value:""
+                    value:"",
+                    validation:{
+                        required:true
+                    },
+                    valid:false
                 },
                 zipCode:{
                     elementType:"input",
@@ -29,7 +38,13 @@ class ContactData extends Component{
                         type:"text",
                         placeholder:"Your Postal/Zip code"
                     },
-                    value:""
+                    value:"",
+                    validation:{
+                        required:true,
+                        maxLength:"10",
+                        minLength:"5"
+                    },
+                    valid:false
                 },
                 country:{
                     elementType:"input",
@@ -37,7 +52,11 @@ class ContactData extends Component{
                         type:"text",
                         placeholder:"Country"
                     },
-                    value:""
+                    value:"",
+                    validation:{
+                        required:true
+                    },
+                    valid:false
                 },
                 email:{
                     elementType:"input",
@@ -45,7 +64,12 @@ class ContactData extends Component{
                         type:"email",
                         placeholder:"Your E-Mail"
                     },
-                    value:""
+                    value:"",
+                    validation:{
+                        required:true,
+                        email:true
+                    },
+                    valid:false
                 },
                 deliveryMethod:{
                     elementType:"select",
@@ -53,8 +77,13 @@ class ContactData extends Component{
                         options:[
                             {value:"fastest",displayValue:"Fastest"},
                             {value:"cheapest",displayValue:"Cheapest"}
-                        ]
+                        ],
                     },
+                value:"",
+                validation:{
+                    required:true
+                },
+                valid:false
                 }
             },
         loading:false
@@ -67,6 +96,7 @@ class ContactData extends Component{
         // this.nameRef.current.focus()
     }
     orderHandler=(event)=>{
+        
         event.preventDefault();
         this.setState({loading:true})
         // alert("You coninue!!!")
@@ -96,8 +126,22 @@ class ContactData extends Component{
         })
 
     }
+    checkValidity=(value,validationRules)=>{
+        let isValid = true;
+
+        if(validationRules.required){
+            isValid = value.trim() !== '' && isValid;
+        }
+        if(validationRules.email){
+            isValid = validator.isEmail(value) && isValid
+        }
+        if(validationRules.minLength && validationRules.maxLength){
+            isValid = validator.isLength(value,{min:validationRules.minLength, max:validationRules.maxLength }) && isValid
+        }
+        return isValid;
+    }
     onChangeHandler=(event,inputIdentifier)=>{
-        console.log(event.target.value);
+        console.log("Value = "+event.target.value);
         const updatedOrderForm={...this.state.orderForm}
         console.log(updatedOrderForm)
         //Deep Clone
@@ -105,10 +149,15 @@ class ContactData extends Component{
         console.log(updatedFormElement)
 
         updatedFormElement.value = event.target.value;
+        // console.log("updatedFormElement.value = event.target.value")
+        // console.log(updatedFormElement)
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation);
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm:updatedOrderForm}) 
+        console.log(updatedFormElement)
+        this.setState({orderForm:updatedOrderForm},()=>{
+            // validation(this.state.orderForm);
 
-
+        })
     }
     render(){
         let formElementsArray=[]
