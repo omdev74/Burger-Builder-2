@@ -43,6 +43,18 @@
     transform: scaleZ(5.1%);
     }
 
+.Button:disabled{
+    background-color: #a0a0a0;
+    cursor:not-allowed;
+
+}
+
 .InputElement:focus{
     border: 2px solid #6300EC;;
+}
+
+.Invalid{
+    border: 2px solid red;;
+    background-color: #ffdcdc;
+
 }
