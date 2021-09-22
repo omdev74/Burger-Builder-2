@@ -85,9 +85,7 @@ class ContactData extends Component{
                         ],
                     },
                 value:"",
-                validation:{
-                    required:true
-                },
+                validation:{},
                 valid:true,
                 touched:false
                 }
@@ -135,6 +133,9 @@ class ContactData extends Component{
     }
     checkValidity=(value,validationRules)=>{
         let isValid = true;
+        if(!validationRules){
+            return true
+        }
 
         if(validationRules.required){
             isValid = value.trim() !== '' && isValid;
