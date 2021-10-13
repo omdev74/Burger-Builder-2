@@ -5,7 +5,8 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler"
 import axios from "../../axios-orders"
 class Orders extends Component{
     state={
-        orders:[],
+        //TODO: use redux
+        orders:[],//!later discussed in handling async code
         loading:true
     }
     componentDidMount(){

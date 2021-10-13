@@ -5,6 +5,7 @@ import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component{
     state={
+        //TODO: use redux
         ingredients:null,
         totalPrice:0
     }
@@ -51,6 +52,7 @@ class Checkout extends Component{
                 <Route path={
                     this.props.match.path + "/contact-data"} 
                     // component={ContactData}
+                    //TODO: use redux to render ContactData
                     render={(props)=>(
                                         <ContactData 
                                         ingredients={this.state.ingredients} 

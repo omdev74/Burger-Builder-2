@@ -17,16 +17,14 @@ const INGREDIENT_PRICES={
 
 class BurgerBuilder extends Component{
     state={
-        ingredients:
-        // {
-        //     cheese:0,
-        //     meat:0,
-        //     salad:0,
-        //     bacon:0
-        // },
-        null,
+        //TODO: use redux
+        ingredients:null,
         totalPrice:40,
+
+        //* used to unlock order button
         purchasable:false,
+
+        //!Local UI
         purchasing:false,
         loading:false,
         error:false

@@ -1,4 +1,6 @@
 import React,{Component} from "react";
+//TODO: use connect HOC to get ingredients
+
 import classes from "./ContactData.module.css"
 import Input from "../../../components/Ui/Input/Input";
 import Spinner from "../../../components/Ui/Spinner/Spinner"
@@ -6,6 +8,7 @@ import axios from "../../../axios-orders";
 import validator from "validator";
 class ContactData extends Component{
     state={
+        //! Local UI
         orderForm:{
                 name:{
                     elementType:"input",
@@ -112,6 +115,7 @@ class ContactData extends Component{
         }
         console.log(formData)
         const order={
+            //TODO: get from redux store
             ingredients:this.props.ingredients,
             price:this.props.price,//always recalculate it on server
             orderData:formData
