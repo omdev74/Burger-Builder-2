@@ -6,8 +6,10 @@ import Input from "../../../components/Ui/Input/Input";
 import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
 import validator from "validator";
+
+import { connect } from "react-redux";
 class ContactData extends Component{
-    state={
+    state={ 
         //! Local UI
         orderForm:{
                 name:{
@@ -225,4 +227,4 @@ class ContactData extends Component{
     }
 }
 
-export default ContactData
+export default connect(mapStateToProps,mapDispatchToProps)(ContactData)
