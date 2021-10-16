@@ -118,8 +118,8 @@ class ContactData extends Component{
         console.log(formData)
         const order={
             //TODO: get from redux store
-            ingredients:this.props.ingredients,
-            price:this.props.price,//always recalculate it on server
+            ingredients:this.props.ingr,
+            price:this.props.ttlPrice,//always recalculate it on server
             orderData:formData
             
         }
@@ -226,5 +226,12 @@ class ContactData extends Component{
 
     }
 }
+//*setting up redux store access and subscription
+const mapStateToProps = state =>{
+    return{
+        ingr: state.ingredients,
+        ttlPrice: state.totalPrice
+    }
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(ContactData)
+export default connect(mapStateToProps)(ContactData)
