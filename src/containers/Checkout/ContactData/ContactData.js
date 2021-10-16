@@ -1,5 +1,4 @@
 import React,{Component} from "react";
-//TODO: use connect HOC to get ingredients
 
 import classes from "./ContactData.module.css"
 import Input from "../../../components/Ui/Input/Input";
@@ -98,18 +97,12 @@ class ContactData extends Component{
         formIsValid:false,
         loading:false
     }
-    // constructor(props){
-    //     super(props);
-    //     // this.nameRef = React.createRef();
-    // }
     componentDidMount(){
-        // this.nameRef.current.focus()
     }
     orderHandler=(event)=>{
         
         event.preventDefault();
         this.setState({loading:true})
-        // alert("You coninue!!!")
 
         const formData={};
         for(let formElementIdentifier in this.state.orderForm){
@@ -117,7 +110,6 @@ class ContactData extends Component{
         }
         console.log(formData)
         const order={
-            //TODO: get from redux store
             ingredients:this.props.ingr,
             price:this.props.ttlPrice,//always recalculate it on server
             orderData:formData

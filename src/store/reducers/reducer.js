@@ -17,7 +17,7 @@ const INGREDIENT_PRICES={
 
 const reducers = (state = initialState,action)=>{
     switch (action.type) {
-        case actionTypes.SET_INGREDIENTS: 
+        case actionTypes.ADD_INGREDIENTS: 
             return{
                 ...state,
                 ingredients:{
@@ -37,16 +37,7 @@ const reducers = (state = initialState,action)=>{
                     
             }
         }
-        case actionTypes.SET_UPDATED_INGREDIENTS: 
-            return{
-                ...state,
-                ingredients:action.ingNAME
-            }
-        case actionTypes.SET_NEWPRICE: 
-            return{
-                ...state,
-                totalPrice:action.nPrice
-            }
+        
     
         default: return state;
     }

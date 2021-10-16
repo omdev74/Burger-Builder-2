@@ -45,42 +45,7 @@ class BurgerBuilder extends Component{
         return sum>0
         
     }
-    // addIngredientHandler=(type)=>{
-    //     // const oldCount = this.state.ingredients[type];
-    //     const oldCount = this.props.ingr[type];
-    //     const updatedCount = oldCount +1;
-    //     const updatedIngredients={
-    //         // ...this.state.ingredients
-    //         ...this.props.ingr
-    //     };
-    //     updatedIngredients[type]= updatedCount;
-    //     const priceAddition = INGREDIENT_PRICES[type];
-    //     const oldPrice = this.props.ttlPrice;
-    //     const newPrice = oldPrice+priceAddition;
-    //     // this.setState({ingredients:updatedIngredients,totalPrice:newPrice});
-    //     this.props.setUpdatedIngredients(updatedIngredients);
-    //     this.props.setNewPrice(newPrice);
-    //     this.updatePurchaseState(updatedIngredients);
-
-    // }
-
-    // removeIngredientHandler=(type)=>{
-    //     const oldCount = this.props.ingr[type];
-    //     if(oldCount <= 0){
-    //         return;
-    //     }
-    //     const updatedCount = oldCount -1;
-    //     const updatedIngredients={
-    //         ...this.props.ingr
-    //     };
-    //     updatedIngredients[type]= updatedCount;
-    //     const priceDeduction = INGREDIENT_PRICES[type];
-    //     const oldPrice = this.props.ttlPrice;
-    //     const newPrice = oldPrice-priceDeduction;
-    //     this.setState({ingredients:updatedIngredients,totalPrice:newPrice});
-    //     this.updatePurchaseState(updatedIngredients);
-
-    // }
+    
     purchaseHandler=()=>{
         this.setState({purchasing:true})
     }
@@ -88,7 +53,7 @@ class BurgerBuilder extends Component{
         this.setState({purchasing:false})
     }
     purchaseContinueHandler=()=>{this.props.history.push("/checkout")}
-    
+
     render(){
         console.log(this.props)
         const disabledinfo={
@@ -106,7 +71,7 @@ class BurgerBuilder extends Component{
                 <Burger ingredients={this.props.ingr}/>
                 <div>
                     <BuildControls
-                    ingredientAdded={this.props.setIngredients}
+                    ingredientAdded={this.props.addIngredients}
                     ingredientRemoved={this.props.removeIngredients}
                     disabled={disabledinfo}
                     purchasable={this.updatePurchaseState(this.props.ingr)}
@@ -150,11 +115,8 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = dispatch=>{
     return{
-        // onIncrementCounter: () => dispatch({type:actionTypes.INC_COUNTER}),
-        setIngredients:(response)=>dispatch({type:actionTypes.SET_INGREDIENTS,ingNAME:response}),
-        removeIngredients:(response)=>dispatch({type:actionTypes.REMOVE_INGREDIENTS,ingNAME:response}),
-        setUpdatedIngredients:(updatedIngredients)=>dispatch({type:actionTypes.SET_UPDATED_INGREDIENTS,ingNAME:updatedIngredients}),
-        setNewPrice:(newPrice)=>dispatch({type:actionTypes.SET_NEWPRICE,nPrice:newPrice})
+        addIngredients:(response)=>dispatch({type:actionTypes.ADD_INGREDIENTS,ingNAME:response}),
+        removeIngredients:(response)=>dispatch({type:actionTypes.REMOVE_INGREDIENTS,ingNAME:response})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(BurgerBuilder,axios));
