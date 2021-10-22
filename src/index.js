@@ -8,22 +8,24 @@ import {BrowserRouter} from "react-router-dom"
 import { createStore,compose, applyMiddleware } from 'redux';
 import { Provider} from 'react-redux';
 
-import rootReducer from './store/reducers/reducer';
+import rootReducer from './store/reducers/burgerBuilder';
 import thunk from 'redux-thunk';
 
-// const middleware = store =>{
-//   return next=>{
-//     return action=>{
-//       next(action)
-//     }
-//   }
-// }
+const middleware = store =>{
+  return next=>{
+    return action=>{
+      next(action)
+    }
+  }
+}
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const store = createStore(rootReducer,composeEnhancers(applyMiddleware(middleware),thunk))
+const store = createStore(rootReducer,composeEnhancers(
+  applyMiddleware(middleware,thunk)
+  ))
 
-const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+// const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 const app = (

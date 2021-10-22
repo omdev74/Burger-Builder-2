@@ -10,7 +10,7 @@ import Spinner from "../../components/Ui/Spinner/Spinner";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
-import * as actionTypes from "../../store/actions"
+import * as burgerBuilderAction from "../../store/actions"
 import { connect } from "react-redux";
 
 
@@ -19,19 +19,11 @@ class BurgerBuilder extends Component{
 
         //!Local UI
         purchasing:false,
-        loading:false,
-        error:false
+        loading:false
     }
     componentDidMount(){
         //! async code----------------------------------
-        // axios.get("/ingredients.json")
-        // .then(response =>{
-        //     // this.setState({ingredients:response.data})
-        //     this.props.setIngredients(response.data)
-        // })
-        // .catch(error=>{
-        //     this.setState({error:true})
-        // })
+        this.props.getIngredients()
     }
     updatePurchaseState(ingredients){
         const sum = Object.keys(ingredients)
@@ -64,7 +56,7 @@ class BurgerBuilder extends Component{
         }
         //{salad:true,meat:false,,}
         let orderSummary= null;
-        let burger = this.state.error ? <p>INGREDIENTS CAN'T BE LOADED</p>:<Spinner/> 
+        let burger = this.props.error ? <p>INGREDIENTS CAN'T BE LOADED</p>:<Spinner/> 
         if(this.props.ingr){
             burger = (
                 <Aux>
@@ -110,13 +102,15 @@ class BurgerBuilder extends Component{
 const mapStateToProps = state =>{
     return{
         ingr: state.ingredients,
-        ttlPrice: state.totalPrice
+        ttlPrice: state.totalPrice,
+        error: state.error
     }
 }
 const mapDispatchToProps = dispatch=>{
     return{
-        addIngredients:(response)=>dispatch({type:actionTypes.ADD_INGREDIENTS,ingNAME:response}),
-        removeIngredients:(response)=>dispatch({type:actionTypes.REMOVE_INGREDIENTS,ingNAME:response})
+        addIngredients:(response)=>dispatch(burgerBuilderAction.addIngredient(response)),
+        removeIngredients:(response)=>dispatch(burgerBuilderAction.removeIngredient(response)),
+        getIngredients:()=>dispatch(burgerBuilderAction.getIngredients())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(BurgerBuilder,axios));
