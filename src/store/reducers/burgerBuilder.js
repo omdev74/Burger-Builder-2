@@ -42,7 +42,13 @@ const reducers = (state = initialState,action)=>{
         case actionTypes.SET_INGREDIENTS:
             return{
                 ...state,
-                ingredients: action.response,
+                ingredients: {
+                    //* minding the order
+                    cheese:action.response.cheese,
+                    meat:action.response.meat,
+                    salad:action.response.salad,
+                    bacon:action.response.bacon   
+                },
                 error:false
             }
 

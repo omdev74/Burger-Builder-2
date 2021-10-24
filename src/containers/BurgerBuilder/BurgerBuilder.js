@@ -10,7 +10,7 @@ import Spinner from "../../components/Ui/Spinner/Spinner";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
-import * as burgerBuilderAction from "../../store/actions"
+import * as burgerBuilderAction from "../../store/actions/index"
 import { connect } from "react-redux";
 
 
