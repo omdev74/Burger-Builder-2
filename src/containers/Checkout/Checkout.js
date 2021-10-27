@@ -20,7 +20,8 @@ class Checkout extends Component{
 
     }
     render(){
-        let summary = <Redirect to="/" />
+
+        let summary = <Redirect to="/"></Redirect>
         if(this.props.ingr){
             summary = (
                 <div>
@@ -30,7 +31,7 @@ class Checkout extends Component{
                         checkoutCancelled={this.checkoutCancelled}
                         />
                     <Route path={
-                        this.props.match.path + "/contact-data"} 
+                        this.props.match.path + "/contact-data"}
                         component={ContactData}
                         />
                 </div>
@@ -38,8 +39,12 @@ class Checkout extends Component{
             )
 
         }
+
         console.log(this.props)
-        return {summary}
+        return (
+            summary
+        )
+        
             
     }
 
