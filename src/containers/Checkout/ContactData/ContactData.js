@@ -91,7 +91,7 @@ class ContactData extends Component{
                             {value:"cheapest",displayValue:"Cheapest"}
                         ],
                     },
-                value:"",
+                value:"fastest",
                 validation:{},
                 valid:true,
                 touched:false
@@ -201,7 +201,6 @@ class ContactData extends Component{
                 <div className="Headers"> <h1>Enter your details..</h1></div>
                 <div className={classes.ContactData}>
                     {form}
-                    {console.log(this.nameRef)}
                     
                 </div>
                 </div>
@@ -212,9 +211,9 @@ class ContactData extends Component{
 //*setting up redux store access and subscription
 const mapStateToProps = state =>{
     return{
-        ingr: state.ingredients,
-        ttlPrice: state.totalPrice,
-        loading: state.loading
+        ingr: state.burgerBuilder.ingredients,
+        ttlPrice: state.burgerBuilder.totalPrice,
+        loading: state.order.loading
     }
 }
 

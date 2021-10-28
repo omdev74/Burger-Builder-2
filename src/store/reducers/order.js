@@ -7,12 +7,17 @@ const initialState ={
 }
 const reducers = (state = initialState,action)=>{
 switch(action.type){
-
-    case actionTypes.PURCHASE_BURGER_FAIL:
+    case actionTypes.PURCHASE_BURGER_START:
+        return{
+            ...state,
+            loading:true 
+        }
+    case actionTypes.PURCHASE_BURGER_FAIL:{
+        console.log(action.error)
         return{
             ...state,
             loading:false
-        }
+        }}
     case actionTypes.PURCHASE_BURGER_SUCCESS:
         const TransFormedOrder = {
             ...action.orderData,
@@ -23,12 +28,11 @@ switch(action.type){
             loading:false,
             orders:state.orders.concat(TransFormedOrder)
         }
-    case actionTypes.PURCHASE_BURGER_START:
-        return{
-            
-        }
+    
         
     default : return state
     
 }
 }
+
+export default reducers

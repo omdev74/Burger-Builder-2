@@ -5,11 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
 
-import { createStore,compose, applyMiddleware } from 'redux';
+import { createStore,compose, applyMiddleware,combineReducers} from 'redux';
 import { Provider} from 'react-redux';
 
-import rootReducer from './store/reducers/burgerBuilder';
 import thunk from 'redux-thunk';
+
+import OrderReducer from "./store/reducers/order"
+import burgerBuilderReducer from "./store/reducers/burgerBuilder"
+
+const rootReducer =  combineReducers({
+  order:  OrderReducer,
+  burgerBuilder:  burgerBuilderReducer
+})
+
+
 
 const middleware = store =>{
   return next=>{

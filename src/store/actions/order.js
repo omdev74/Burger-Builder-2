@@ -6,9 +6,14 @@ const purchaseBurgerSuccess = (orderId,orderData)=>{
         type:actionTypes.PURCHASE_BURGER_SUCCESS,
         orderId,
         orderData
-
     }
     
+}
+const purchaseBurgerFail = (error)=>{
+    return{
+        type:actionTypes.PURCHASE_BURGER_FAIL,
+        error
+    }
 }
 const purchaseBurgerStart = ()=>{
     return{
@@ -17,21 +22,17 @@ const purchaseBurgerStart = ()=>{
     }
 }
 
-const purchaseBurgerfail = (error)=>{
-    return{
-        type:actionTypes.PURCHASE_BURGER_FAIL,
-        error
-    }
-}
+
 export const purchaseBurger = (orderData)=>{
     return(dipsatch)=>{
         dipsatch(purchaseBurgerStart())
         axios.post("/orders.json",orderData)
         .then(response => {
-            dipsatch(purchaseBurgerSuccess(response.data,orderData))
+            dipsatch(purchaseBurgerSuccess(response.data.name,orderData))
+            console.log(response.data)
         })
         .catch(error => {
-            dipsatch(purchaseBurgerfail(error))
+            dipsatch(purchaseBurgerFail(error))
         })
     }
 }
