@@ -10,7 +10,7 @@ import Spinner from "../../components/Ui/Spinner/Spinner";
 
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
-import * as burgerBuilderAction from "../../store/actions/index"
+import * as actions from "../../store/actions/index"
 import { connect } from "react-redux";
 
 
@@ -44,7 +44,10 @@ class BurgerBuilder extends Component{
     purchaseCancelHandler=()=>{
         this.setState({purchasing:false})
     }
-    purchaseContinueHandler=()=>{this.props.history.push("/checkout")}
+    purchaseContinueHandler=()=>{
+        this.props.purchaseInit()
+        this.props.history.push("/checkout")
+    }
 
     render(){
         console.log(this.props)
@@ -108,9 +111,11 @@ const mapStateToProps = state =>{
 }
 const mapDispatchToProps = dispatch=>{
     return{
-        addIngredients:(response)=>dispatch(burgerBuilderAction.addIngredient(response)),
-        removeIngredients:(response)=>dispatch(burgerBuilderAction.removeIngredient(response)),
-        getIngredients:()=>dispatch(burgerBuilderAction.getIngredients())
+        addIngredients:(response)=>dispatch(actions.addIngredient(response)),
+        removeIngredients:(response)=>dispatch(actions.removeIngredient(response)),
+        getIngredients:()=>dispatch(actions.getIngredients()),
+        purchaseInit: ()=> dispatch(actions.purchaseInit())
     }
 }
+
 export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(BurgerBuilder,axios));

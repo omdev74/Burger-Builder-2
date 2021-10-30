@@ -9,7 +9,7 @@ const withErrorHandler = (WrappedComponent,axios)=>{
         // constructor(props){
         //     super(props);
         componentWillMount(){
-        console.log("constructor acceseed")
+        // console.log("constructor acceseed")
         this.setState({
             error:null
         })

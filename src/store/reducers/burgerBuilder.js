@@ -37,7 +37,9 @@ const reducers = (state = initialState,action)=>{
                     ...state.ingredients,
                     [action.ingNAME]: state.ingredients[action.ingNAME]-1
                     
-            }
+            },
+            totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingNAME]
+
         }
         case actionTypes.SET_INGREDIENTS:
             return{
