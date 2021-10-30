@@ -44,6 +44,7 @@ const reducers = (state = initialState,action)=>{
         case actionTypes.SET_INGREDIENTS:
             return{
                 ...state,
+                totalPrice:40,
                 ingredients: {
                     //* minding the order
                     cheese:action.response.cheese,
@@ -52,6 +53,7 @@ const reducers = (state = initialState,action)=>{
                     bacon:action.response.bacon   
                 },
                 error:false
+                
             }
 
         case actionTypes.FETCH_INGREDIENTS_ERROR:
