@@ -3,7 +3,9 @@ import * as actionTypes from "../actions/actionTypes"
 const initialState ={
     orders:[],
     loading:false,
-    purchased:false
+    purchased:false,
+    error:null
+    
 
 }
 const reducers = (state = initialState,action)=>{
@@ -22,7 +24,8 @@ switch(action.type){
         console.log(action.error)
         return{
             ...state,
-            loading:false
+            loading:false,
+            error:action.error
         }}
     case actionTypes.PURCHASE_BURGER_SUCCESS:
         const TransFormedOrder = {
@@ -36,6 +39,29 @@ switch(action.type){
             orders:state.orders.concat(TransFormedOrder)
             
 
+        }
+    // case actionTypes.FETCH_ORDER_INIT:
+    //     return{
+    //         ...state,
+
+    //     }
+    case actionTypes.FETCH_ORDER_SUCCESS:
+        return{
+            ...state,
+            orders:action.orders,
+            loading:false
+        }
+
+    case actionTypes.FETCH_ORDER_START:
+        return{
+            ...state,
+            loading:true
+        }
+    case actionTypes.FETCH_ORDER_FAIL:
+        return{
+            ...state,
+            loading:false,
+            error:action.error
         }
     
     

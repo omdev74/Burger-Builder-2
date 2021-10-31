@@ -10,6 +10,7 @@ const purchaseBurgerSuccess = (orderId,orderData)=>{
     
 }
 const purchaseBurgerFail = (error)=>{
+    console.log("[purchaseBurgerFail]",error)
     return{
         type:actionTypes.PURCHASE_BURGER_FAIL,
         error
@@ -22,7 +23,7 @@ const purchaseBurgerStart = ()=>{
     }
 }
 
-
+//!posts Response(orderData) to the firebase
 export const purchaseBurger = (orderData)=>{
     return(dipsatch)=>{
         dipsatch(purchaseBurgerStart())
@@ -43,3 +44,52 @@ export const purchaseInit = ()=>{
     }
 
 }
+
+// const fetchedOrderInit = ()=>{
+//     return{
+//         type:actionTypes.FETCH_ORDER_INIT
+//     }
+
+// }
+
+const fetchOrderSuccess = (orders)=>{
+    return{
+        type:actionTypes.FETCH_ORDER_SUCCESS,
+        orders
+    }
+}
+const fetchOrderFail = (error)=>{
+    console.log("[fetchOrderFail]",error)
+    return{
+        type:actionTypes.FETCH_ORDER_FAIL,
+        error
+    }
+}
+
+
+//!fetches orders from firebase
+export const fetchOrders = ()=>{
+    return(dispatch)=>{
+        axios.get("/orders.json")
+        .then(res=>{
+            const fetchedOrders=[]
+            console.log(res.data)
+            for(let key in res.data){
+                fetchedOrders.push({
+                    ...res.data[key],
+                    id:key})
+            }
+            dispatch(fetchOrderSuccess(fetchedOrders))
+            // this.setState({loading:false,orders:fetchedOrders})
+            console.log(this.state.orders)
+        })
+        .catch(err=>{
+            fetchOrderFail(err)
+            // this.setState({loading:false})
+
+        })
+
+
+    }
+}
+
