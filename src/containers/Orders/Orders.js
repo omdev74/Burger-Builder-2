@@ -5,11 +5,10 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler"
 import axios from "../../axios-orders"
 import * as actions from "../../store/actions"
 import { connect } from "react-redux"
+import Spinner from "../../components/Ui/Spinner/Spinner"
 class Orders extends Component{
     state={
-        //TODO: use redux
-        // orders:[],//!later discussed in handling async code
-        // loading:true
+        
     }
     constructor(props){
         super(props);
@@ -17,18 +16,22 @@ class Orders extends Component{
     }
 
     render(){
+        let orders = <Spinner></Spinner>
+        if(!this.props.loading){
+            orders = this.props.orders.map(order=>(
+                <Order 
+                key={order.id}
+                ingredients={order.ingredients}
+                price={order.price}/>
+
+            ))
+        }
         return(
             <div>
                 <div className="Headers"> <h1>ORDERS</h1></div>
                 <div className="List">
                     {console.log(this.props.orders)}
-                    {this.props.orders.map(order=>(
-                        <Order 
-                        key={order.id}
-                        ingredients={order.ingredients}
-                        price={order.price}/>
-
-                    ))}
+                    {orders}
                 </div>
             </div>
             
@@ -42,7 +45,7 @@ class Orders extends Component{
 const mapStateToProps = (state)=>{
     return{
         orders:state.order.orders,
-        // error:state.order.error
+        loading:state.order.loading
     }
 
 }

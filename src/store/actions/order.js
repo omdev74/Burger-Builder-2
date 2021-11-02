@@ -45,12 +45,6 @@ export const purchaseInit = ()=>{
 
 }
 
-// const fetchedOrderInit = ()=>{
-//     return{
-//         type:actionTypes.FETCH_ORDER_INIT
-//     }
-
-// }
 
 const fetchOrderSuccess = (orders)=>{
     return{
@@ -62,7 +56,12 @@ const fetchOrderFail = (error)=>{
     console.log("[fetchOrderFail]",error)
     return{
         type:actionTypes.FETCH_ORDER_FAIL,
-        error
+        error:error
+    }
+}
+const fetchedOrderStart =()=>{
+    return{
+        type:actionTypes.FETCH_ORDER_START
     }
 }
 
@@ -70,6 +69,7 @@ const fetchOrderFail = (error)=>{
 //!fetches orders from firebase
 export const fetchOrders = ()=>{
     return(dispatch)=>{
+        dispatch(fetchedOrderStart())
         axios.get("/orders.json")
         .then(res=>{
             const fetchedOrders=[]
@@ -81,10 +81,10 @@ export const fetchOrders = ()=>{
             }
             dispatch(fetchOrderSuccess(fetchedOrders))
             // this.setState({loading:false,orders:fetchedOrders})
-            console.log(this.state.orders)
+           
         })
-        .catch(err=>{
-            fetchOrderFail(err)
+        .catch(error=>{
+            dispatch(fetchOrderFail(error))
             // this.setState({loading:false})
 
         })
