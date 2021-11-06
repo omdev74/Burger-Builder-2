@@ -12,4 +12,8 @@ export{
 
 } from "./order"
 
+export{
+    auth
+}from "./auth"
+
 export {} from "./order"

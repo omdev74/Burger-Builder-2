@@ -13,6 +13,12 @@ export const FETCH_ORDER_FAIL ="FETCH_ORDER_FAIL"
 export const FETCH_ORDER_START ="FETCH_ORDER_START" //! sets loading to true
 export const FETCH_ORDER_INIT ="FETCH_ORDER_INIT" //! sets loading to true
 
+export const AUTH_START = "AUTH_START"
+export const AUTH_SUCCESS = "AUTH_SUCCESS"
+export const AUTH_FAIL = "AUTH_FAIL"
+
+
+
 
 
 
