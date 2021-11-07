@@ -14,12 +14,15 @@ export const authFail = (error)=>{
     }
 }
 
-export const authSuccess = (authData)=>{
+export const authSuccess = (idToken,userId)=>{
     return{
         type: actionTypes.AUTH_SUCCESS,
-        authData
+        payload:{
+            idToken,
+            userId
+        }}
     }
-}
+
 
 export const auth=(email,password,isSignup)=>{
     return dispatch =>{
@@ -38,8 +41,10 @@ export const auth=(email,password,isSignup)=>{
         }
         axios.post(url,authData)
         .then(response =>{
-            console.log("🚀 ~ file: auth.js ~ line 34 ~ auth ~ response", response)
-            dispatch(authSuccess(response))
+        console.log("🚀 ~ file: auth.js ~ line 44 ~ auth ~ response", response)
+            dispatch(authSuccess(response.data.idToken,response.data.localId))
+            
+            
         })
         .catch(error =>{
             console.log("🚀 ~ file: auth.js ~ line 35 ~ auth ~ error", error)
