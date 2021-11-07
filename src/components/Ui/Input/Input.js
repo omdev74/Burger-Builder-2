@@ -40,6 +40,7 @@ const input = (props)=>{
         case("button"):
             inputElement=<button className={classes.Button} disabled={props.disabled}{...props}>{props.children}</button>
             break;
+            
         
         default:
             // inputElement=<input className={classes.InputElement} {...props}/>

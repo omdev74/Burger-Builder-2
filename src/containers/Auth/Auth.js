@@ -35,7 +35,8 @@ class Auth extends Component {
                 },
                 valid:false,
                 touched:false
-            }}
+            }},
+            isSignup:true
         }
         checkValidity=(value,validationRules)=>{
         console.log("🚀 ~ file: Auth.js ~ line 39 ~ Auth ~ value", value)
@@ -76,9 +77,21 @@ class Auth extends Component {
 
         submitHandler = (event)=>{
             event.preventDefault();
-            this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value);
+            this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value,this.state.isSignup);
 
         }
+
+        switchAuthModeHandler = (event)=>{
+            event.preventDefault();
+            this.setState(prevState =>{
+                return {isSignup:!prevState.isSignup}
+                
+            });
+            console.log("🚀 ~ file: Auth.js ~ line 88 ~ Auth ~ isSignup", this.state.isSignup)
+            
+        }
+            
+        
         
     render() {
         let formElementsArray=[]
@@ -107,9 +120,19 @@ class Auth extends Component {
         ))
         return (
             <div>
-                <form class={classes.login} onSubmit={this.submitHandler}>
+                <form class={classes.login}>
                     {form}
-                    <Input elementType="button">LOGIN</Input> 
+                    <button 
+                    className={classes.Button_1} 
+                    disabled={false}
+                    onClick={this.submitHandler}
+                    >SUBMIT</button>
+                    <button 
+                    className={classes.Button_1} 
+                    disabled={false}
+                    onClick={this.switchAuthModeHandler}
+                    >SWITCH TO {this.state.isSignup ? "SIGN IN" : "SIGN UP" }</button>
+
                 </form>
             </div>
         )
@@ -118,7 +141,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = (disaptch)=>{
     return{
-        onAuth : (email,password) => disaptch(actions.auth(email,password))
+        onAuth : (email,password,isSignup) => disaptch(actions.auth(email,password,isSignup))
     }
 }
 

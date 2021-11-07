@@ -21,19 +21,25 @@ export const authSuccess = (authData)=>{
     }
 }
 
-export const auth=(email,password)=>{
+export const auth=(email,password,isSignup)=>{
     return dispatch =>{
+        console.log("🚀 ~ file: auth.js ~ line 25 ~ auth ~ email,password", email,password)
+
         dispatch(authStart());
         const authData={
-            email,
-            password,
+            email:email,
+            password:password,
             returnSecureToken:true
         }
-        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[AIzaSyDJalFyHyYA1KpZx-zUVrOTwCuSQ1GOxEE]",authData)
+
+        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDJalFyHyYA1KpZx-zUVrOTwCuSQ1GOxEE"
+        if(!isSignup){
+            url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDJalFyHyYA1KpZx-zUVrOTwCuSQ1GOxEE"
+        }
+        axios.post(url,authData)
         .then(response =>{
             console.log("🚀 ~ file: auth.js ~ line 34 ~ auth ~ response", response)
             dispatch(authSuccess(response))
-            
         })
         .catch(error =>{
             console.log("🚀 ~ file: auth.js ~ line 35 ~ auth ~ error", error)
