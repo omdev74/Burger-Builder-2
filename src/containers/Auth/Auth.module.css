@@ -1,3 +1,12 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --height: 400px
+  }
+
 .login {
     overflow: hidden;
     background-color: white;
@@ -8,9 +17,10 @@
     left: 50%;
     width: 400px;
     margin-left: -200px;
-    margin-top: -150px;
-    height: 300px;
+    margin-top: calc((var(--height)/2)*-1);
+    height: var(--height);
     text-align: center;
+    color: black;
 }
 
 .Button_1{
@@ -39,7 +49,7 @@
 }
 
 .Button_2{
-    margin: 20px auto 0px auto;
+    margin: 20px auto 20px auto;
     padding: 10px;
     font: inherit;
     border: 1px solid black;

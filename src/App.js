@@ -1,10 +1,11 @@
 import React,{Component} from "react";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
-import Layout from "./components/Layout/Layout";
+import Layout from "./containers/Layout/Layout";
 import Checkout from "./containers/Checkout/Checkout";
 import {Route,Switch} from "react-router-dom"
 import Orders from "./containers/Orders/Orders";
 import Auth from "./containers/Auth/Auth";
+import Logout from "./containers/Auth/Logout/Logout";
 class App extends Component{
   state={show:true}
     
@@ -21,6 +22,7 @@ class App extends Component{
           <Route path="/checkout"  component={Checkout} />
           <Route path="/orders"  component={Orders} />
           <Route path="/auth"  component={Auth} />
+          <Route path="/logout"  component={Logout} />
           <Route path="/" exact component={BurgerBuilder} />
           </Switch>
         

@@ -16,11 +16,14 @@ const reducer = (state=initialState,action)=>{
             userId:action.payload.userId,
             error:null,
             loading:false})
-        case actionTypes.AUTH_FAIL: case actionTypes.AUTH_SUCCESS: return updateObject(state,{
+        case actionTypes.AUTH_FAIL: return updateObject(state,{
             error:action.payload.error,
             loading:false})
+        case actionTypes.AUTH_LOGOUT: return updateObject(state,{token:null,userId:null})
         default:
             return state;
     }
 
 }
+
+export default reducer

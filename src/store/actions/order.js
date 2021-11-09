@@ -67,10 +67,10 @@ const fetchedOrderStart =()=>{
 
 
 //!fetches orders from firebase
-export const fetchOrders = ()=>{
+export const fetchOrders = (token)=>{
     return(dispatch)=>{
         dispatch(fetchedOrderStart())
-        axios.get("/orders.json")
+        axios.get("/orders.json?auth="+token)
         .then(res=>{
             const fetchedOrders=[]
             console.log(res.data)

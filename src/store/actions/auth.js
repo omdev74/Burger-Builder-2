@@ -1,6 +1,26 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
+
+export const logout = ()=>{
+    console.log("LOGGING OUT......")
+    return{
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+
+export const checkAuthTimeout = (expTime)=>{
+    console.log("🚀 ~ file: auth.js ~ line 6 ~ checkAuthTimeout ~ expTime", expTime)
+    return dispatch=>{
+        setTimeout(() => {
+            dispatch(logout())
+            console.log("LOGOUT")
+        }, expTime*1000);
+    }
+}
+
+
 export const authStart = ()=>{
     return{
         type: actionTypes.AUTH_START
@@ -10,7 +30,9 @@ export const authStart = ()=>{
 export const authFail = (error)=>{
     return{
         type: actionTypes.AUTH_FAIL,
-        error
+        payload:{
+            error
+        }
     }
 }
 
@@ -43,12 +65,13 @@ export const auth=(email,password,isSignup)=>{
         .then(response =>{
         console.log("🚀 ~ file: auth.js ~ line 44 ~ auth ~ response", response)
             dispatch(authSuccess(response.data.idToken,response.data.localId))
+            dispatch(checkAuthTimeout(response.data.expiresIn))
             
             
         })
         .catch(error =>{
             console.log("🚀 ~ file: auth.js ~ line 35 ~ auth ~ error", error)
-            dispatch(authFail(error))
+            dispatch(authFail(error.message))
 
 
         })

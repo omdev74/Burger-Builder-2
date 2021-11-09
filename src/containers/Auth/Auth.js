@@ -4,6 +4,7 @@ import validator from 'validator'
 import classes from "./Auth.module.css"
 import * as actions from "../../store/actions/index"
 import { connect } from 'react-redux'
+import Spinner from "../../components/Ui/Spinner/Spinner"
 
 class Auth extends Component {
     state={
@@ -90,6 +91,22 @@ class Auth extends Component {
             console.log("🚀 ~ file: Auth.js ~ line 88 ~ Auth ~ isSignup", this.state.isSignup)
             
         }
+
+        errorHandler = ()=>{
+            console.log("called")
+            
+            let errMessage = null;
+                if(this.props.error){
+                    errMessage = (
+                        <p>{this.props.error}</p>
+                    )
+                    let form = document.getElementsByClassName(classes.login)
+                    console.log("🚀 ~ file: Auth.js ~ line 98 ~ Auth ~ form", form )
+                    
+                }
+                return errMessage;
+
+        }
             
         
         
@@ -101,7 +118,7 @@ class Auth extends Component {
                 config:this.state.controls[key]
             })
         }
-        const form = formElementsArray.map(formElement =>(
+        let form = formElementsArray.map(formElement =>(
             <Input 
                 key = {formElement.id}
                 label={formElement.id.toUpperCase()}
@@ -118,9 +135,14 @@ class Auth extends Component {
             </Input>
 
         ))
+        if(this.props.loading){
+            form = <Spinner></Spinner>
+        }
+        
         return (
             <div>
-                <form class={classes.login}>
+                <form className={classes.login}>
+                    {this.errorHandler()}
                     {form}
                     <button 
                     className={classes.Button_1} 
@@ -139,10 +161,17 @@ class Auth extends Component {
     }
 }
 
+
+const mapStateToProps = (state)=>{
+    return{
+        loading: state.auth.loading,
+        error: state.auth.error
+    }
+}
 const mapDispatchToProps = (disaptch)=>{
     return{
         onAuth : (email,password,isSignup) => disaptch(actions.auth(email,password,isSignup))
     }
 }
 
-export default connect(null,mapDispatchToProps)(Auth)
+export default connect(mapStateToProps,mapDispatchToProps)(Auth)
