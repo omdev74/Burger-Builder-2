@@ -3,7 +3,8 @@ import { updateObject } from "../utility"
 const initialState = {
     ingredients:null,
     totalPrice:40,
-    error:false
+    error:false,
+    building:false
 }
 const INGREDIENT_PRICES={
     cheese:20,
@@ -19,7 +20,8 @@ const reducers = (state = initialState,action)=>{
                     ...state.ingredients,
                     [action.ingNAME]: state.ingredients[action.ingNAME]+1
                 },
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingNAME]
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingNAME],
+                building:true
         })
         case actionTypes.REMOVE_INGREDIENTS: 
             return updateObject(state,{
@@ -27,7 +29,8 @@ const reducers = (state = initialState,action)=>{
                     ...state.ingredients,
                     [action.ingNAME]: state.ingredients[action.ingNAME]-1
                 },
-                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingNAME]
+                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingNAME],
+                building:true
             })
         case actionTypes.SET_INGREDIENTS:return updateObject(state,{
                 totalPrice:40,
@@ -38,7 +41,8 @@ const reducers = (state = initialState,action)=>{
                     salad:action.response.salad,
                     bacon:action.response.bacon   
                 },
-                error:false
+                error:false,
+                building:false
         })
         case actionTypes.FETCH_INGREDIENTS_ERROR:return updateObject(state,{error:true})
         default: return state;

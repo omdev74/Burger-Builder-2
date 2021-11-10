@@ -2,6 +2,16 @@ import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
 
+export const setAuthRedirect =(path,message)=>{
+    return{
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        payload:{
+            path,
+            message
+        }
+    }
+}
+
 export const logout = ()=>{
     console.log("LOGGING OUT......")
     return{

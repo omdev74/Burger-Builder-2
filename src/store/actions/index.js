@@ -14,7 +14,8 @@ export{
 
 export{
     auth,
-    logout
+    logout,
+    setAuthRedirect
 }from "./auth"
 
 export {} from "./order"

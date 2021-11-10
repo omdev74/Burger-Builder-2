@@ -9,8 +9,6 @@ const navigationItems = (props)=>(
             ?<NavigationItem  link="/logout">Log Out</NavigationItem>
             :<NavigationItem  link="/auth">Authentication</NavigationItem>
             }
-        
-        
     </ul>
 
 );
