@@ -24,10 +24,10 @@ const purchaseBurgerStart = ()=>{
 }
 
 //!posts Response(orderData) to the firebase
-export const purchaseBurger = (orderData)=>{
+export const purchaseBurger = (orderData,token)=>{
     return(dipsatch)=>{
         dipsatch(purchaseBurgerStart())
-        axios.post("/orders.json",orderData)
+        axios.post("/orders.json?auth="+ token,orderData)
         .then(response => {
             dipsatch(purchaseBurgerSuccess(response.data.name,orderData))
             console.log(response.data)
@@ -67,10 +67,11 @@ const fetchedOrderStart =()=>{
 
 
 //!fetches orders from firebase
-export const fetchOrders = (token)=>{
+export const fetchOrders = (token,userId)=>{
     return(dispatch)=>{
         dispatch(fetchedOrderStart())
-        axios.get("/orders.json?auth="+token)
+        const queryParams = "?auth="+token+'&orderBy="userId"&equalTo="' + userId+'"';
+        axios.get("/orders.json"+queryParams)
         .then(res=>{
             const fetchedOrders=[]
             console.log(res.data)

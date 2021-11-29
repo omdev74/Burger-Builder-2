@@ -27,7 +27,7 @@ class App extends Component{
     <Switch>
       <Route path="/auth"  component={Auth} />
       <Route path="/" exact component={BurgerBuilder} />
-      <Redirect to ="/"></Redirect> //! redirects every request excluding above
+      <Redirect to ="/"></Redirect>
     </Switch>
     );
   
@@ -72,4 +72,4 @@ const mapDispatchToProps = (dispatch) =>{
   
 }
 
-export default withRouter(connect(null,mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));
