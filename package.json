@@ -1,6 +1,6 @@
 {
   "name": "burger-builder",
-  "version": "0.18.17",
+  "version": "0.18.19",
   "private": true,
   "engines": {
     "node": "16.6.1",
