@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Input from '../../components/Ui/Input/Input'
-import validator from 'validator'
 import classes from "./Auth.module.css"
 import * as actions from "../../store/actions/index"
 import { connect } from 'react-redux'

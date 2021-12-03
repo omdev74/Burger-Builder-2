@@ -4,7 +4,6 @@ import classes from "./ContactData.module.css"
 import Input from "../../../components/Ui/Input/Input";
 import Spinner from "../../../components/Ui/Spinner/Spinner"
 import axios from "../../../axios-orders";
-import validator from "validator";
 import * as orderActions from "../../../store/actions/index"
 
 import { updateObject,checkValidity } from "../../../shared/utility";
