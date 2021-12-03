@@ -7,7 +7,7 @@ import axios from "../../../axios-orders";
 import validator from "validator";
 import * as orderActions from "../../../store/actions/index"
 
-import { updateObject } from "../../../shared/utility";
+import { updateObject,checkValidity } from "../../../shared/utility";
 
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
@@ -123,24 +123,7 @@ class ContactData extends Component{
         this.props.onOrderBurger(order,this.props.token);
 
     }
-    checkValidity=(value,validationRules)=>{
-        let isValid = true;
-        if(!validationRules){
-            return true
-        }
-
-        if(validationRules.required){
-            isValid = value.trim() !== '' && isValid;
-        }
-        if(validationRules.email){
-            isValid = validator.isEmail(value) && isValid
-        }
-        if(validationRules.minLength && validationRules.maxLength){
-            isValid = validator.isLength(value,{min:validationRules.minLength, max:validationRules.maxLength }) && isValid
-        }
-        return isValid;
-    }
-
+    
 
     onChangeHandler=(event,inputIdentifier)=>{
         console.log("Value = "+event.target.value);
@@ -148,7 +131,7 @@ class ContactData extends Component{
         
         const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier],{
             value:event.target.value,
-            valid:this.checkValidity(event.target.value,this.state.orderForm[inputIdentifier].validation),
+            valid:checkValidity(event.target.value,this.state.orderForm[inputIdentifier].validation),
             touched:true
         });
         const updatedOrderForm = updateObject(this.state.orderForm,{
