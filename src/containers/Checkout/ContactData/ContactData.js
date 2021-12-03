@@ -7,6 +7,8 @@ import axios from "../../../axios-orders";
 import validator from "validator";
 import * as orderActions from "../../../store/actions/index"
 
+import { updateObject } from "../../../shared/utility";
+
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
 import { connect } from "react-redux";
@@ -138,21 +140,21 @@ class ContactData extends Component{
         }
         return isValid;
     }
+
+
     onChangeHandler=(event,inputIdentifier)=>{
         console.log("Value = "+event.target.value);
-        const updatedOrderForm={...this.state.orderForm}
-        console.log(updatedOrderForm)
-        //Deep Clone
-        const updatedFormElement={...updatedOrderForm[inputIdentifier]};
-        console.log(updatedFormElement)
+        
+        
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier],{
+            value:event.target.value,
+            valid:this.checkValidity(event.target.value,this.state.orderForm[inputIdentifier].validation),
+            touched:true
+        });
+        const updatedOrderForm = updateObject(this.state.orderForm,{
+            [inputIdentifier]:updatedFormElement
+        })
 
-        updatedFormElement.value = event.target.value;
-        // console.log("updatedFormElement.value = event.target.value")
-        // console.log(updatedFormElement)
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value,updatedFormElement.validation);
-        updatedFormElement.touched = true;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
-        // console.log(updatedFormElement)
         let formIsValid = true;
         for(inputIdentifier in updatedOrderForm){
             formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
